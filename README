@@ -1,0 +1,10 @@
+Repository for my Thesis of ANPR(Automated Number Plate Recognition) system
+
+includes:
+
+1.Android app
+2.Python ANPR script
+3.Custom YOLOv3.weights
+4.Custom YOLOv3.config
+5.Custom object classes
+6.Custom OCR traineddata 
