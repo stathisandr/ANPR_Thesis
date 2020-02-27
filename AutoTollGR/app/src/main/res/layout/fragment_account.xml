@@ -26,7 +26,6 @@
                     android:layout_marginRight="@dimen/exit_icon_marg"
                     android:layout_gravity="end"
                     android:tint="@color/whiteColor"
-                    android:onClick="onClick"
                     android:background="@drawable/baseline_exit_to_app_white_24dp"/>
 
                 <ImageView

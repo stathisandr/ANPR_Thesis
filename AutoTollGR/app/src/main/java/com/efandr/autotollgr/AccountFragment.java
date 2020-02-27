@@ -31,11 +31,13 @@ import java.util.ArrayList;
 public class AccountFragment extends Fragment {
 
     private EditText accountemail, accountlicenceplate, accountvehicletype, accountpassword;
-    private TextView accountusername;
+    private TextView accountusername, userdrivein, usertotal;
 
     private String userID;
 
     public User Current_User;
+
+    protected DatabaseReference databaseReference;
 
     private FirebaseAuth mAuth;
 
@@ -81,6 +83,9 @@ public class AccountFragment extends Fragment {
         accountvehicletype = (EditText) myFragmentView.findViewById(R.id.account_vehicletype);
         accountpassword = (EditText) myFragmentView.findViewById(R.id.account_password);
 
+        userdrivein = (TextView) myFragmentView.findViewById(R.id.account_drive_in);
+        usertotal = (TextView) myFragmentView.findViewById(R.id.account_total_spend);
+
         Button button = (Button) myFragmentView.findViewById(R.id.exit_button);
         button.setOnClickListener(new View.OnClickListener()
         {
@@ -99,9 +104,17 @@ public class AccountFragment extends Fragment {
         userID = user.getUid();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference();
+        databaseReference = database.getReference();
 
-        databaseReference.child("Users").addValueEventListener(new ValueEventListener() {
+        userInfo(databaseReference);
+
+        userStatistics(databaseReference);
+
+        return myFragmentView;
+    }
+
+    private void userInfo(DatabaseReference database){
+        database.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -132,9 +145,47 @@ public class AccountFragment extends Fragment {
 
             }
         });
-
-
-        return myFragmentView;
     }
 
+    private void userStatistics(final DatabaseReference database){
+        database.child("Purchase").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                // shake hands with each of them.
+                for (DataSnapshot child : children) {
+                    if(child.getKey().equals(Current_User.getLicenceplate())){
+                        database.child("Purchase").child(Current_User.getLicenceplate()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                                // shake hands with each of them.
+                                int driveincnt = 0;
+                                float totalspend = 0.0f;
+                                for (DataSnapshot child : children) {
+                                    driveincnt++;
+                                    totalspend = totalspend + Float.parseFloat((String) child.child("cost").getValue());
+
+                                }
+                                userdrivein.setText(String.valueOf(driveincnt));
+                                usertotal.setText(Float.toString(totalspend)+"€");
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
