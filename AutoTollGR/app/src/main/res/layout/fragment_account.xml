@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,12 +11,26 @@
             android:layout_width="match_parent"
             android:layout_height="405dp"
             android:id="@+id/recycleView">
+
             <LinearLayout
                 android:background="@drawable/gradientbackground"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/exit_button"
+                    android:layout_width="@dimen/exit_icon_dim"
+                    android:layout_height="@dimen/exit_icon_dim"
+                    android:layout_marginTop="@dimen/exit_icon_marg"
+                    android:layout_marginRight="@dimen/exit_icon_marg"
+                    android:layout_gravity="end"
+                    android:tint="@color/whiteColor"
+                    android:onClick="onClick"
+                    android:background="@drawable/baseline_exit_to_app_white_24dp"/>
+
                 <ImageView
+                    android:id="@+id/user_photo"
                     android:layout_marginTop="45dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="100dp"
@@ -31,6 +46,8 @@
                     android:textColor="#fff"
                     android:textStyle="bold"
                     android:textSize="21sp"/>
+
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="380dp"
@@ -226,14 +243,5 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="710dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/buttonstyle"
-        android:text="Follow Me"
-        android:textColor="#fff" />
 
 </FrameLayout>

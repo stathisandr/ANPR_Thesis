@@ -1,6 +1,7 @@
 package com.efandr.autotollgr;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -71,13 +73,25 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View myFragmentView = inflater.inflate(R.layout.fragment_account, container, false);
+        final View myFragmentView = inflater.inflate(R.layout.fragment_account, container, false);
 
         accountusername = (TextView) myFragmentView.findViewById(R.id.account_username);
         accountemail = (EditText) myFragmentView.findViewById(R.id.account_email);
         accountlicenceplate = (EditText) myFragmentView.findViewById(R.id.account_licenceplate);
         accountvehicletype = (EditText) myFragmentView.findViewById(R.id.account_vehicletype);
         accountpassword = (EditText) myFragmentView.findViewById(R.id.account_password);
+
+        Button button = (Button) myFragmentView.findViewById(R.id.exit_button);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FirebaseAuth.getInstance().signOut();
+                getActivity().finish();
+                startActivity(new Intent(getActivity(),LoginActivity.class));
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();

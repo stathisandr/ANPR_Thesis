@@ -24,4 +24,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Main exit button -->
+    <dimen name="exit_icon_dim">40dp</dimen>
+    <dimen name="exit_icon_marg">10dp</dimen>
+
 </resources>
