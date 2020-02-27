@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorNavigationBar">#D32F2F</color>
+    <color name="startRed">#f44336</color>
+    <color name="endRed">#d32f2f</color>
+    <color name="grayLight">#e0e0e0</color>
+
+
+    <color name="whiteColor">#ffffff</color>
+    <color name="rowBg">#E4E4E4</color>
+    <color name="movieTitle">#797979</color>
+    <color name="yearTitle">#CC8BDA</color>
+    <color name="rateTitle">#CFC767</color>
+</resources>

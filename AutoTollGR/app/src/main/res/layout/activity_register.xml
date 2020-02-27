@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/autotollgrbackground"
+    tools:context=".RegisterActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/auto_toll_gr_logo_width"
+        android:layout_height="@dimen/auto_toll_gr_logo_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/auto_toll_gr_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.127" />
+
+    <LinearLayout
+        android:id="@+id/register_userinfo_linearlayout"
+        android:layout_width="@dimen/LR_pages_text_views_width"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807">
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:background="@drawable/rounded_box">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_account_circle_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_username"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/enroll_username"
+                android:inputType="text"
+                android:maxLength="25" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:background="@drawable/rounded_box"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_text_format_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_licenceplate"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/enroll_licence_plate"
+                android:inputType="textCapCharacters"
+                android:maxLength="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:background="@drawable/rounded_box"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_directions_car_white_24dp" />
+
+            <Spinner
+                android:id="@+id/register_vehicle_type"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:entries="@array/enroll_vehicle_type"
+                android:prompt="@string/enroll_spinner_vt"
+                android:spinnerMode="dialog" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_userinfo_button"
+            android:layout_width="@dimen/LR_pages_buttons_width"
+            android:layout_height="@dimen/LR_pages_buttons_height"
+            android:layout_marginTop="@dimen/margin_button_top"
+            android:background="@drawable/rounded_button"
+            android:text="@string/enroll_register_button"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/register_carinfo__linearlayout"
+        android:layout_width="@dimen/LR_pages_text_views_width"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.792">
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:background="@drawable/rounded_box">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_account_circle_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_bank_holder"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/bank_card_holder"
+                android:inputType="textCapCharacters"
+                android:maxLength="40" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            android:background="@drawable/rounded_box">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_credit_card_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_bank_cardnumber"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/bank_card_number"
+                android:inputType="number"
+                android:maxLength="16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            android:background="@drawable/rounded_box"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_credit_card_cvv_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_bank_cvv"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/bank_card_cvv"
+                android:inputType="numberPassword"
+                android:maxLength="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            android:background="@drawable/rounded_box"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_access_time_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_bank_expire_day"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/bank_card_expire_day"
+                android:inputType="number"
+                android:maxLength="4" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_bank_button"
+            android:layout_width="@dimen/LR_pages_buttons_width"
+            android:layout_height="@dimen/LR_pages_buttons_height"
+            android:layout_marginTop="@dimen/margin_button_top"
+            android:background="@drawable/rounded_button"
+            android:onClick="onClick"
+            android:text="@string/bank_card_button" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/register_register_linearlayout"
+        android:layout_width="@dimen/LR_pages_text_views_width"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807">
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:background="@drawable/rounded_box">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_mail_outline_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_e_mail"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_e_mail"
+                android:inputType="textEmailAddress"
+                android:maxLength="40" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            android:background="@drawable/rounded_box">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_lock_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_password"
+                android:inputType="textPassword"
+                android:maxLength="40" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/LR_pages_text_views_width"
+            android:layout_height="@dimen/LR_pages_text_views_height"
+            android:layout_marginTop="@dimen/margin_text_views_top"
+            android:background="@drawable/rounded_box"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <ImageView
+                android:layout_width="@dimen/LR_icon_width"
+                android:layout_height="@dimen/LR_icon_height"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_ivm"
+                android:background="@drawable/baseline_lock_white_24dp" />
+
+            <EditText
+                android:id="@+id/register_re_type_password"
+                android:layout_width="@dimen/LR_pages_text_views_width"
+                android:layout_height="@dimen/LR_pages_text_views_height"
+                android:layout_marginLeft="@dimen/LR_pages_text_views_margin_etm"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_re_type_password"
+                android:inputType="textPassword"
+                android:maxLength="40" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_register_button"
+            android:layout_width="@dimen/LR_pages_buttons_width"
+            android:layout_height="@dimen/LR_pages_buttons_height"
+            android:layout_marginTop="@dimen/margin_button_top"
+            android:background="@drawable/rounded_button"
+            android:onClick="onClick"
+            android:text="@string/register_register_button" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/register_login_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="@string/register_login_button"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.977" />
+</androidx.constraintlayout.widget.ConstraintLayout>
