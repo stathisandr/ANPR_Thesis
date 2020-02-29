@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private LinearLayout register, userinfo, cardinfo;
 
-    private EditText remail,rpassword,rusername,rlicenceplate,bcholder,bcnumber,bcvv,bcexpire;
+    private EditText remail,rpassword,rrpassword,rusername,rlicenceplate,bcholder,bcnumber,bcvv,bcexpire;
     private Spinner rvehicletype;
 
     private Button registerbtn, enrollbtn, bankbtn;
@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         remail = (EditText)findViewById(R.id.register_e_mail);
         rpassword = (EditText)findViewById(R.id.register_password);
+        rrpassword = (EditText)findViewById(R.id.register_re_type_password);
         rusername = (EditText)findViewById(R.id.register_username);
         rlicenceplate = (EditText)findViewById(R.id.register_licenceplate);
         rvehicletype = (Spinner)findViewById(R.id.register_vehicle_type);
@@ -73,6 +74,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String email = remail.getText().toString();
         String password = rpassword.getText().toString();
+        String repassword = rrpassword.getText().toString();
+
+        if(!validSingUp(email,password,repassword)){
+            return;
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -90,6 +96,78 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
     }
 
+    private boolean validCardInfo(String cardholder, String cardnumber, String cardcvv, String cardexpday){
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(cardholder)) {
+            bcholder.setError("Required.");
+            valid = false;
+        } else {
+            remail.setError(null);
+        }
+
+        if (TextUtils.isEmpty(cardnumber)) {
+            bcnumber.setError("Required.");
+            valid = false;
+        } else if(cardnumber.length()<16){
+            bcnumber.setError("At least 16 numbers");
+        }else {
+            bcnumber.setError(null);
+        }
+
+        if (TextUtils.isEmpty(cardcvv)){
+            bcvv.setError("Required");
+            valid = false;
+        } else if(cardcvv.length()<3){
+            bcvv.setError("At least 3 numbers");
+            valid = false;
+        } else {
+            bcvv.setError(null);
+        }
+
+        if (TextUtils.isEmpty(cardexpday)){
+            bcexpire.setError("Required");
+            valid = false;
+        } else if(!(cardexpday.length()==4)){
+            bcexpire.setError("Should be 4 numbers");
+            valid = false;
+        } else if(cardexpday.contains("/")){
+            bcexpire.setError("Must be in form MMYY");
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    private boolean validSingUp(String email, String password, String repassword){
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(email)) {
+            remail.setError("Required.");
+            valid = false;
+        } else {
+            remail.setError(null);
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            rpassword.setError("Required.");
+            valid = false;
+        } else {
+            rpassword.setError(null);
+        }
+
+        if (TextUtils.isEmpty(repassword)){
+            rrpassword.setError("Required");
+            valid = false;
+        } else if(!password.equals(repassword)){
+            rrpassword.setError("Password doesn't match");
+            valid = false;
+        } else {
+            rrpassword.setError(null);
+        }
+        return valid;
+    }
+
     private void onAuthSuccess() {
         register.setVisibility(View.GONE);
         userinfo.setVisibility(View.VISIBLE);
@@ -99,25 +177,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userinfo.setVisibility(View.GONE);
         cardinfo.setVisibility(View.VISIBLE);
     }
-
-    /*private boolean validateForm() {
-        boolean result = true;
-        if (TextUtils.isEmpty(remail.getText().toString())) {
-            remail.setError("Required");
-            result = false;
-        } else {
-            remail.setError(null);
-        }
-
-        if (TextUtils.isEmpty(rpassword.getText().toString())) {
-            rpassword.setError("Required");
-            result = false;
-        } else {
-            rpassword.setError(null);
-        }
-
-        return result;
-    }*/
 
     // [START basic_write]
     private void writeNewUser(String userId, String email, String name, String licenceplate, String vehicletype, String userid, String password) {
@@ -141,11 +200,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         cexpireday = bcexpire.getText().toString();
         String userid = user.getUid();
 
+        if(!validCardInfo(cholder,cnumber,cvv,cexpireday)){
+            return;
+        }
+
         writeNewCard(cholder,cnumber,cvv,cexpireday,userid);
 
         // Go to MainActivity
         startActivity(new Intent(RegisterActivity.this, MainActivity.class));
         finish();
+    }
+
+    private boolean validCarInfo(String username, String licenceplate){
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(username)) {
+            rusername.setError("Required.");
+            valid = false;
+        } else {
+            rusername.setError(null);
+        }
+
+        if (TextUtils.isEmpty(licenceplate)) {
+            rlicenceplate.setError("Required.");
+            valid = false;
+        } else {
+            rlicenceplate.setError(null);
+        }
+        return valid;
     }
 
     private void enroll(FirebaseUser user){
@@ -159,6 +241,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         vehiclety = rvehicletype.getSelectedItem().toString();
         password = rpassword.getText().toString();
         String userid = user.getUid();
+
+        if(!validCarInfo(username,licencepl)){
+            return;
+        }
 
         // Write new user
         writeNewUser(user.getUid(), email, username, licencepl, vehiclety,userid, password);
