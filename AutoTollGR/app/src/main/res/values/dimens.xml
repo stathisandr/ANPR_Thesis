@@ -25,7 +25,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Main exit button -->
-    <dimen name="exit_icon_dim">40dp</dimen>
+    <dimen name="exit_icon_dim">35dp</dimen>
     <dimen name="exit_icon_marg">10dp</dimen>
+
+    <!-- Card text sizes -->
+    <dimen name="card_number_text_size">18sp</dimen>
+    <dimen name="card_expired_text_size">10sp</dimen>
+    <dimen name="card_holder_text_size">14sp</dimen>
+    <dimen name="card_cvv_text_size">14sp</dimen>
 
 </resources>

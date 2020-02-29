@@ -33,6 +33,9 @@ public class AccountFragment extends Fragment {
     private EditText accountemail, accountlicenceplate, accountvehicletype, accountpassword;
     private TextView accountusername, userdrivein, usertotal;
 
+    int driveincnt = 0;
+    float totalspend = 0.0f;
+
     private String userID;
 
     public User Current_User;
@@ -148,6 +151,8 @@ public class AccountFragment extends Fragment {
     }
 
     private void userStatistics(final DatabaseReference database){
+        userdrivein.setText(String.valueOf(driveincnt));
+        usertotal.setText(Float.toString(totalspend)+"€");
         database.child("Purchase").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -160,12 +165,9 @@ public class AccountFragment extends Fragment {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                                 // shake hands with each of them.
-                                int driveincnt = 0;
-                                float totalspend = 0.0f;
                                 for (DataSnapshot child : children) {
                                     driveincnt++;
                                     totalspend = totalspend + Float.parseFloat((String) child.child("cost").getValue());
-
                                 }
                                 userdrivein.setText(String.valueOf(driveincnt));
                                 usertotal.setText(Float.toString(totalspend)+"€");
@@ -178,7 +180,6 @@ public class AccountFragment extends Fragment {
 
                     }
                 }
-
 
             }
 

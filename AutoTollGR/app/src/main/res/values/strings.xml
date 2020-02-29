@@ -50,4 +50,11 @@
     <string name="history_price">Price: </string>
     <string name="history_time">Time: </string>
 
+    <!-- Balance Fragment -->
+    <string name="card_holder">CARD HOLDER</string>
+    <string name="card_number">XXXX XXXX XXXX XXXX</string>
+    <string name="card_cvv">XXX</string>
+    <string name="card_expired">MM/YY</string>
+    <string name="card_expired_text">VALID UP TO:</string>
+
 </resources>

@@ -129,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void writeNewCard(String holder, String number, String cvv, String expireday, String userid){
         CreditCard card = new CreditCard(holder,number,cvv,expireday,userid);
 
-        mDatabase.child("Users").child(LPlate).child("Cards").push().setValue(card);
+        mDatabase.child("Cards").child(userid).setValue(card);
     }
 
     private void card(FirebaseUser user){

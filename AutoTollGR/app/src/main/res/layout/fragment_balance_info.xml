@@ -5,11 +5,111 @@
     android:layout_height="match_parent"
     tools:context=".BalanceInfoFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:src="@drawable/baseline_directions_car_white_24dp"/>
+    <RelativeLayout
+        android:id="@+id/rl_card"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/ic_card_bg"
+        android:padding="@dimen/activity_horizontal_margin">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_chip" />
+
+            <TextView
+                android:id="@+id/card_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/card_number"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/card_number_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:text="@string/card_expired_text"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="@dimen/card_expired_text_size" />
+
+                <TextView
+                    android:id="@+id/card_validity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/card_expired"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="@dimen/card_expired_text_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/card_holder_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/card_holder"
+                android:textAllCaps="true"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/card_holder_text_size" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/card_Type"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_width="85dp"
+            android:layout_height="50dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_gravity="center_vertical"
+        android:id="@+id/rl_back_card"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:background="@drawable/ic_card_back"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/card_cvv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/card_cvv"
+                android:minWidth="50dp"
+                android:inputType="textPassword"
+                android:layout_gravity="right"
+                android:textColor="@color/grayhard"
+                android:textSize="@dimen/card_cvv_text_size"/>
+        </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>
