@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">AutoTollGR</string>
+
+    <!-- Login Page-->
+    <string name="login_e_mail">E-mail</string>
+    <string name="login_password">Password</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_register_button">New in AutoTollGR? Register Here!</string>
+
+    <!-- Register Page -->
+    <string name="register_e_mail">E-mail</string>
+    <string name="register_password">Password</string>
+    <string name="register_re_type_password">Re-type Password</string>
+    <string name="register_register_button">Register</string>
+    <string name="register_login_button">Already registerded?</string>
+
+    <!-- Enroll fragment -->
+    <string name="enroll_username">Username</string>
+    <string name="enroll_licence_plate">Licence plate e.x EEM-2222</string>
+    <string name="enroll_spinner_vt">Vehicle type</string>
+    <string name="enroll_register_button">Save Vehicle Info</string>
+
+    <!-- Enroll spinner-->
+    <string-array name="enroll_vehicle_type">
+        <item>Motorcycle</item>
+        <item>Light car</item>
+        <item>4-axle truck</item>
+        <item>>4-axle truck</item>
+    </string-array>
+
+    <!-- Main Menu -->
+    <string name="main_menu_account">Account</string>
+    <string name="main_menu_history">History</string>
+    <string name="main_menu_balance_info">Balance Info</string>
+
+    <!-- Account Fragment-->
+    <string name="account_cars">Cars</string>
+    <string name="account_drive_in">Drive In</string>
+    <string name="account_total_spend">Total spend</string>
+
+    <!-- Bank Card Info -->
+    <string name="bank_card_holder">Card Holder</string>
+    <string name="bank_card_number">Card Number</string>
+    <string name="bank_card_cvv">CVV</string>
+    <string name="bank_card_expire_day">Expire day MM/YY</string>
+    <string name="bank_card_button">Save Credit Card</string>
+
+    <!-- History Fragment-->
+    <string name="history_day">Day: </string>
+    <string name="history_price">Price: </string>
+    <string name="history_time">Time: </string>
+
+    <!-- Balance Fragment -->
+    <string name="card_holder">CARD HOLDER</string>
+    <string name="card_number">XXXX XXXX XXXX XXXX</string>
+    <string name="card_cvv">XXX</string>
+    <string name="card_expired">MM/YY</string>
+    <string name="card_expired_text">VALID UP TO:</string>
+
+</resources>

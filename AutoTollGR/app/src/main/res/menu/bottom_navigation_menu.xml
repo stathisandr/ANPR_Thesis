@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/baseline_account_circle_white_24dp"
+        android:title="@string/main_menu_account"/>
+    <item
+        android:id="@+id/navigation_sms"
+        android:icon="@drawable/baseline_history_white_24dp"
+        android:title="@string/main_menu_history" />
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/baseline_account_balance_wallet_white_18dp"
+        android:title="@string/main_menu_balance_info" />
+</menu>

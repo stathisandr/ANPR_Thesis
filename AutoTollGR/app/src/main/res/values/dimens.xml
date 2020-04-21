@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Login Register dimens -->
+    <dimen name="LR_pages_text_views_width">320dp</dimen>
+    <dimen name="LR_pages_buttons_width">320dp</dimen>
+    <dimen name="LR_pages_text_views_height">40dp</dimen>
+    <dimen name="LR_pages_buttons_height">40dp</dimen>
+    <dimen name="LR_pages_text_views_margin_etm">6dp</dimen>
+    <dimen name="LR_pages_text_views_margin_ivm">5dp</dimen>
+    <dimen name="LR_pages_buttons_margins">5dp</dimen>
+
+    <!-- Logo dimens -->
+    <dimen name="auto_toll_gr_logo_width">150dp</dimen>
+    <dimen name="auto_toll_gr_logo_height">150dp</dimen>
+
+    <!-- Login Register icons Edit Text -->
+    <dimen name="LR_icon_width">30dp</dimen>
+    <dimen name="LR_icon_height">30dp</dimen>
+
+    <dimen name="margin_text_views_top">5dp</dimen>
+    <dimen name="margin_button_top">10dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Main exit button -->
+    <dimen name="exit_icon_dim">35dp</dimen>
+    <dimen name="exit_icon_marg">10dp</dimen>
+
+    <!-- Card text sizes -->
+    <dimen name="card_number_text_size">18sp</dimen>
+    <dimen name="card_expired_text_size">10sp</dimen>
+    <dimen name="card_holder_text_size">14sp</dimen>
+    <dimen name="card_cvv_text_size">14sp</dimen>
+
+</resources>

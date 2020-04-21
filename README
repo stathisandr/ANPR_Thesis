@@ -4,7 +4,7 @@ includes:
 
 1.Android app
 2.Python ANPR script
-3.Custom YOLOv3.weights
+3.Custom YOLOv3.weights (https://mega.nz/#!nl5g2QjY!IasJhkP3OfEBLzPib1T_-gBNeI5s1ITSlPteXWTvMjs) Mega cloud
 4.Custom YOLOv3.config
 5.Custom object classes
 6.Custom OCR traineddata 
