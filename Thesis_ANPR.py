@@ -154,12 +154,8 @@ class Ui_MainWindow(object):
         self.anprimage.setDisabled(False)
     
     def anpr_image(self):
-        # Loading image
-        #print(path)
         img = cv2.imread(path)
         height, width, channels = img.shape
-        #print(height)
-        #print(width)
 
         # Detecting objects
         blob = cv2.dnn.blobFromImage(img, 0.00392, (480, 480), (0, 0, 0), True, crop=False)
@@ -209,35 +205,30 @@ class Ui_MainWindow(object):
             message_error ="No licence plate found!"
             self.licenceplatetext.setText(message_error)
             
-
         # Save Licence Plate
         cv2.imwrite('/home/stathisandr/Desktop/7.jpg',prediction)
 
         Cropped_img = '/home/stathisandr/Desktop/7.jpg'
-        #cv2.imshow("Cropped Image", cv2.imread(Cropped_img))
 
         im = Image.open(Cropped_img)
         im_width, im_height = im.size
-        #print('im.size', im.size)
 
         if im_width>im_height and (im_width/im_height<0.8 or im_width/im_height>1.2):
+            type_v = "car"
             # Rectangle
             self.carlicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
             im_left = im.crop((0,0, im_width/2, im_height))
-            #print('im.size', im1.size)
 
             im_right = im.crop((im_width/2, 0, im_width, im_height))
-            #print('im.size', im2.size)
-            plate_recognition(self,im_left,im_right)
+            plate_recognition(self,im_left,im_right, type_v)
         else:
+            type_v = "bike"
             # Square
             self.bikelicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
             im_top = im.crop((0,0, im_width, im_height/2))
-            #print('im.size', im1.size)
 
             im_bot = im.crop((0, im_height/2, im_width, im_height))
-            #print('im.size', im2.size)
-            plate_recognition(self,im_top, im_bot)
+            plate_recognition(self,im_top, im_bot,type_V)
   
 def vehicletype(customerID):
     vehicletypestr = db.child("Users").child(customerID).child("vehicletype").get().val()
@@ -271,25 +262,25 @@ def removeFL(string):
 		string = string.replace(i,'')
 	return string
 
-def plate_recognition(self,firstImage, secondImage):
+def plate_recognition(self,firstImage, secondImage,type_v):
     
     # Use tesseract to convert image into string
     first_half = pytesseract.image_to_string(firstImage, lang = 'grlp', config='--psm 9')
-    #print("First half :", first_half)
     first_half = "".join(re.findall("[A-Z]+", first_half))
     first_half = removeFL(first_half)
 
     # Use tesseract to convert image into string
     second_half = pytesseract.image_to_string(secondImage, lang = 'grlp', config='--psm 10')
-    #print("Second half :", second_half)
     second_half = "".join(filter(lambda i: i.isdigit(), second_half))
 
     LP = first_half+"-"+second_half
 
-    if len(LP)!=8:
-        self.extravalidation.setPlainText("Needs further validation")
-    #print("Licence Plate :"+ str(LP))
-    #print("--- %s seconds ---" %(time.time() - start_time))
+    if type_v == "car":
+        if len(LP)!=8:
+            self.extravalidation.setPlainText("Needs further validation")
+    else:
+        if len(LP)!=6:
+            self.extravalidation.setPlainText("Needs further validation")
 
     datapost(self,LP)
 
