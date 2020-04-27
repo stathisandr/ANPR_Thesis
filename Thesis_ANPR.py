@@ -38,9 +38,9 @@ firebaseConfig = {
 }
 
 # Load Yolo GRLP custom weights, object names & neural network
-net = cv2.dnn.readNet("yolov3-GRLP_final.weights", "yolov3-GRLP.cfg")
+net = cv2.dnn.readNet("/home/stathisandr/Desktop/yolov3-GRLP_final.weights", "/home/stathisandr/Desktop/yolov3-GRLP.cfg")
 classes = []
-with open("obj.names", "r") as f:
+with open("/home/stathisandr/Desktop/obj.names", "r") as f:
     classes = [line.strip() for line in f.readlines()]
 layer_names = net.getLayerNames()
 output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
@@ -51,7 +51,6 @@ pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
 
 # Initialization of firebase
 firebase = pyrebase.initialize_app(firebaseConfig)
-
 
 auth = firebase.auth()
 # Sign in with authenticated autoToll user
@@ -212,9 +211,9 @@ class Ui_MainWindow(object):
             
 
         # Save Licence Plate
-        cv2.imwrite('7.jpg',prediction)
+        cv2.imwrite('/home/stathisandr/Desktop/7.jpg',prediction)
 
-        Cropped_img = '7.jpg'
+        Cropped_img = '/home/stathisandr/Desktop/7.jpg'
         #cv2.imshow("Cropped Image", cv2.imread(Cropped_img))
 
         im = Image.open(Cropped_img)
@@ -224,11 +223,21 @@ class Ui_MainWindow(object):
         if im_width>im_height and (im_width/im_height<0.8 or im_width/im_height>1.2):
             # Rectangle
             self.carlicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
-            fourwheel(self,im)
+            im_left = im.crop((0,0, im_width/2, im_height))
+            #print('im.size', im1.size)
+
+            im_right = im.crop((im_width/2, 0, im_width, im_height))
+            #print('im.size', im2.size)
+            plate_recognition(self,im_left,im_right)
         else:
             # Square
             self.bikelicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
-            twowheel(self,im)
+            im_top = im.crop((0,0, im_width, im_height/2))
+            #print('im.size', im1.size)
+
+            im_bot = im.crop((0, im_height/2, im_width, im_height))
+            #print('im.size', im2.size)
+            plate_recognition(self,im_top, im_bot)
   
 def vehicletype(customerID):
     vehicletypestr = db.child("Users").child(customerID).child("vehicletype").get().val()
@@ -262,55 +271,22 @@ def removeFL(string):
 		string = string.replace(i,'')
 	return string
 
-def fourwheel(self,Image):
-    fw_width, fw_height = Image.size
-    im1 = Image.crop((0,0, fw_width/2, fw_height))
-    #print('im.size', im1.size)
-
-    im2 = Image.crop((fw_width/2, 0, fw_width, fw_height))
-    #print('im.size', im2.size)
-
+def plate_recognition(self,firstImage, secondImage):
+    
     # Use tesseract to convert image into string
-    first_half = pytesseract.image_to_string(im1, lang = 'grlp', config='--psm 9')
+    first_half = pytesseract.image_to_string(firstImage, lang = 'grlp', config='--psm 9')
     #print("First half :", first_half)
     first_half = "".join(re.findall("[A-Z]+", first_half))
     first_half = removeFL(first_half)
 
     # Use tesseract to convert image into string
-    second_half = pytesseract.image_to_string(im2, lang = 'grlp', config='--psm 10')
+    second_half = pytesseract.image_to_string(secondImage, lang = 'grlp', config='--psm 10')
     #print("Second half :", second_half)
     second_half = "".join(filter(lambda i: i.isdigit(), second_half))
 
     LP = first_half+"-"+second_half
 
     if len(LP)!=8:
-        self.extravalidation.setPlainText("Needs further validation")
-    #print("Licence Plate :"+ str(LP))
-    #print("--- %s seconds ---" %(time.time() - start_time))
-
-    datapost(self,LP)
-
-def twowheel(self, Image2):
-    tw_width, tw_height = Image2.size
-    im_top = Image2.crop((0,0, tw_width, tw_height/2))
-    #print('im.size', im1.size)
-
-    im_bot = Image2.crop((0, tw_height/2, tw_width, tw_height))
-    #print('im.size', im2.size)
-
-    # Use tesseract to convert image into string
-    top = pytesseract.image_to_string(im_top, lang = 'grlp', config='--psm 10')
-    #print("Top :", top)
-    top = "".join(re.findall("[A-Z]+", top))
-    top = removeFL(top)
-
-    # Use tesseract to convert image into string
-    bottom = pytesseract.image_to_string(im_bot, lang = 'grlp', config='--psm 10')
-    #print("Bottom :", bottom)
-    bottom = "".join(filter(lambda i: i.isdigit(), bottom))
-
-    LP = top+"-"+bottom
-    if len(LP)!=7:
         self.extravalidation.setPlainText("Needs further validation")
     #print("Licence Plate :"+ str(LP))
     #print("--- %s seconds ---" %(time.time() - start_time))
