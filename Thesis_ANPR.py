@@ -146,81 +146,85 @@ class Ui_MainWindow(object):
         self.anprimage.setDisabled(False)
     
     def anpr_image(self):
-        img = cv2.imread(path)
-        height, width, channels = img.shape
+        image_path = path
+        detect_plate(self, image_path)
 
-        # Detecting objects
-        blob = cv2.dnn.blobFromImage(img, 0.00392, (480, 480), (0, 0, 0), True, crop=False)
+def detect_plate(self, image_path):
+    img = cv2.imread(image_path)
+    height, width, channels = img.shape
 
-        net.setInput(blob)
-        outs = net.forward(output_layers)
+    # Detecting objects
+    blob = cv2.dnn.blobFromImage(img, 0.00392, (480, 480), (0, 0, 0), True, crop=False)
 
-        # Showing informations on the screen
-        class_ids = []
-        confidences = []
-        boxes = []
-        for out in outs:
-            for detection in out:
-                scores = detection[5:]
-                class_id = np.argmax(scores)
-                confidence = scores[class_id]
-                if confidence > 0.5:
-                    # Object detected
-                    center_x = int(detection[0] * width)
-                    center_y = int(detection[1] * height)
-                    w = int(detection[2] * width)
-                    h = int(detection[3] * height)
+    net.setInput(blob)
+    outs = net.forward(output_layers)
 
-                    # Rectangle coordinates
-                    x = int(center_x - w / 2)
-                    y = int(center_y - h / 2)
+    # Showing informations on the screen
+    class_ids = []
+    confidences = []
+    boxes = []
+    for out in outs:
+        for detection in out:
+            scores = detection[5:]
+            class_id = np.argmax(scores)
+            confidence = scores[class_id]
+            if confidence > 0.5:
+                # Object detected
+                center_x = int(detection[0] * width)
+                center_y = int(detection[1] * height)
+                w = int(detection[2] * width)
+                h = int(detection[3] * height)
 
-                    boxes.append([x, y, w, h])
-                    confidences.append(float(confidence))
-                    class_ids.append(class_id)
+                # Rectangle coordinates
+                x = int(center_x - w / 2)
+                y = int(center_y - h / 2)
 
-        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
-        #print(indexes)
-        font = cv2.FONT_HERSHEY_PLAIN
-        for i in range(len(boxes)):
-            if i in indexes:
-                x, y, w, h = boxes[i]
-                label = str(classes[class_ids[i]])
-                color = colors[i]
-                cv2.rectangle(img, (x, y), (x + w, y + h), color, 4)
-                cv2.putText(img, "Licence Plate", (x, y), font, 3, color, 3)
+                boxes.append([x, y, w, h])
+                confidences.append(float(confidence))
+                class_ids.append(class_id)
 
-        try:
-            # Create new image
-            prediction = img[y:y+h,x:x+w]
-        except:
-            message_error ="No licence plate found!"
-            self.licenceplatetext.setText(message_error)
+    indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
+    #print(indexes)
+    font = cv2.FONT_HERSHEY_PLAIN
+    for i in range(len(boxes)):
+        if i in indexes:
+            x, y, w, h = boxes[i]
+            label = str(classes[class_ids[i]])
+            color = colors[i]
+            cv2.rectangle(img, (x, y), (x + w, y + h), color, 4)
+            cv2.putText(img, "Licence Plate", (x, y), font, 3, color, 3)
+
+    try:
+        # Create new image
+        prediction = img[y:y+h,x:x+w]
+    except:
+        message_error ="No licence plate found!"
+        self.licenceplatetext.setText(message_error)
             
-        # Save Licence Plate
-        cv2.imwrite('/home/stathisandr/Desktop/7.jpg',prediction)
+    # Save Licence Plate
+    cv2.imwrite('/home/stathisandr/Desktop/7.jpg',prediction)
 
-        Cropped_img = '/home/stathisandr/Desktop/7.jpg'
+    Cropped_img = '/home/stathisandr/Desktop/7.jpg'
 
-        im = Image.open(Cropped_img)
-        im_width, im_height = im.size
+    im = Image.open(Cropped_img)
+    im_width, im_height = im.size
 
-        if im_width>im_height and (im_width/im_height<0.8 or im_width/im_height>1.2):
-            type_v = "car"
-            # Rectangle
-            self.carlicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
-            im_left = im.crop((0,0, im_width/2, im_height))
+    if im_width>im_height and (im_width/im_height<0.8 or im_width/im_height>1.2):
+        type_v = "car"
+        # Rectangle
+        self.carlicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
+        im_left = im.crop((0,0, im_width/2, im_height))
 
-            im_right = im.crop((im_width/2, 0, im_width, im_height))
-            plate_recognition(self,im_left,im_right, type_v)
-        else:
-            type_v = "bike"
-            # Square
-            self.bikelicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
-            im_top = im.crop((0,0, im_width, im_height/2))
+        im_right = im.crop((im_width/2, 0, im_width, im_height))
+        plate_recognition(self,im_left,im_right, type_v)
+    else:
+        type_v = "bike"
+        # Square
+        self.bikelicenceplate.setPixmap(QtGui.QPixmap(Cropped_img))
+        im_top = im.crop((0,0, im_width, im_height/2))
 
-            im_bot = im.crop((0, im_height/2, im_width, im_height))
-            plate_recognition(self,im_top, im_bot,type_V)
+        im_bot = im.crop((0, im_height/2, im_width, im_height))
+        plate_recognition(self,im_top, im_bot,type_V)        
   
 def vehicletype(customerID):
     vehicletypestr = db.child("Users").child(customerID).child("vehicletype").get().val()
